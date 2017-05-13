@@ -30,6 +30,9 @@ var px = 100,
 function setup() {
 	createCanvas(800, 600);
 	img = loadImage("espe.png")
+	img2 = loadImage("espe2.png")
+	imgc = loadImage("espec.png")
+	imgc2 = loadImage("espec2.png")
 }
 
 function draw() {
@@ -397,20 +400,20 @@ function Boss() {
 	};
 	this.move = function() {
 		if (px > this.x) {
-			this.speedx = 0.6;
+			this.speedx = 1.25;
 			this.dir = 1;
 		}
 		if (px == this.x) this.speedx = 0;
 		if (px < this.x) {
-			this.speedx = -0.6;
+			this.speedx = -1.25;
 			this.dir = 0;
 		}
 		if (py > this.y) {
-			this.speedy = 0.6;
+			this.speedy = 1.25;
 		}
 		if (py == this.y) this.speedy = 0;
 		if (py < this.y) {
-			this.speedy = -0.6;
+			this.speedy = -1.25;
 		}
 		if (this.x > width - (75 + 15 * 2)) this.x--;
 		if (this.x < 75 + 15 * 2) this.x++;
@@ -429,7 +432,7 @@ function Boss() {
 		this.y += this.speedy;
 	};
 	this.die = function() {
-		if (px < this.x + 15 * 2 && px > this.x - 15 * 2 && py < this.y + 55 * 2 && py > this.y - 30 * 2) {
+		if (px < this.x + 50 && px > this.x - 50 && py < this.y + 150 && py > this.y) {
 			if (invencible > 255) {
 				invencible = 100;
 				vida--;
@@ -439,39 +442,12 @@ function Boss() {
 }
 
 function bos(bx, by, blook, ba, bb) {
-	//stroke(0);
-	noStroke();
-	fill(200, 0, 0);
-	rect(bx - 2 * 2, by + 10 * 2, 4 * 2, 8 * 2);
-	stroke(0)
-	noStroke();
-	fill(200, 0, 0);
-	ellipse(bx, by, 30 * 2, 30 * 2);
-	fill(255);
+	//stroke(0)
 	if (blook == 1) {
-		ellipse(bx + 7 * 2, by - 2 * 2, 5 * 2, 5 * 2);
-		fill(200, 0, 0);
-		rect(bx - 6 * 2, by + 18 * 2, 12 * 2, 20 * 2);
-		strokeWeight(3 * 2);
-		stroke(0);
-		line(bx + 8 * 2, by + 23 * 2, bx + 15 * 2, by + 23 * 2);
-		line(bx - 2 * 2, by + 39 * 2, bx - 2 * 2 + ba * 2, by + 44 * 2);
-		line(bx + 2 * 2, by + 39 * 2, bx + 2 * 2 + bb * 2, by + 44 * 2);
-		image(img, bx - 16 * 2, by - 20 * 2, 40 * 2, 40 * 2);
-		strokeWeight(1);
+		image(imgc2, bx-100, by, 150, 150);
 	}
 	if (blook === 0) {
-		ellipse(bx - 7 * 2, by - 2 * 2, 5 * 2, 5 * 2);
-		fill(200, 0, 0);
-		noStroke();
-		rect(bx - 6 * 2, by + 18 * 2, 12 * 2, 20 * 2);
-		stroke(0);
-		strokeWeight(3 * 2);
-		line(bx - 8 * 2, by + 23 * 2, bx - 15 * 2, by + 23 * 2);
-		line(bx + 2 * 2, by + 39 * 2, bx + 2 * 2 + ba * 2, by + 44 * 2);
-		line(bx - 2 * 2, by + 39 * 2, bx - 2 * 2 + bb * 2, by + 44 * 2);
-		image(img, bx - 16 * 2, by - 20 * 2, 40 * 2, 40 * 2);
-		strokeWeight(1);
+		image(imgc, bx-100, by, 150, 150);
 	}
 	stroke(0);
 }
@@ -507,7 +483,7 @@ function zom(zx, zy, zlook, za, zb) {
 		line(zx - 8, zy + 23, zx - 15, zy + 23);
 		line(zx + 2, zy + 39, zx + 2 + za, zy + 44);
 		line(zx - 2, zy + 39, zx - 2 + zb, zy + 44);
-		image(img, zx - 16, zy - 20, 40, 40);
+		image(img2, zx - 16, zy - 20, 40, 40);
 		strokeWeight(1);
 	}
 	stroke(0);
@@ -615,7 +591,7 @@ function Shot() {
 			}
 		}
 		for (var i2 = 0; i2 < boss.length; i2++) {
-			if (this.x < boss[i2].x + 15 * 2 && this.x > boss[i2].x - 15 * 2 && this.y < boss[i2].y + 43 * 2 && this.y > boss[i2].y - 15 * 2) {
+			if (this.x < boss[i2].x + 50 && this.x > boss[i2].x - 50&& this.y < boss[i2].y + 150 && this.y > boss[i2].y) {
 				this.hit = 1;
 				boss[i2].live--;
 			}
